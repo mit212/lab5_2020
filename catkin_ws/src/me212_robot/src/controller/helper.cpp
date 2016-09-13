@@ -98,17 +98,14 @@ void PathPlanner::navigateTrajU(const RobotPose & robotPose) {
         updateDesiredV(robotVel, K);
     } 
     // Hemicircle
-    else if (){
-        
-    }
+    //else if (){
+    //}
     // Straight line back
-    else if(){
-        
-    }
+    //else if(){
+    //}
     // Stop at the end
-    else {
-        
-    }
+    //else {
+    //}
 }
 
 void PathPlanner::updateDesiredV(float robotVel, float K) {
