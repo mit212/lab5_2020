@@ -54,7 +54,7 @@ class Arduino():
                 y = float(splitData[2]);
                 phi = float(splitData[3]);
                 
-                print 'x=', x, ' y=', y, ' phi =', phi, ' hz =', 1.0/(rospy.Time.now().to_sec() - self.prevtime.to_sec())
+                print 'x=', x, ' y=', y, ' theta =', phi, ' hz =', 1.0/(rospy.Time.now().to_sec() - self.prevtime.to_sec())
                 self.prevtime = rospy.Time.now()
                 
                 self.br.sendTransform((x, y, 0),                                                # to 3d translation (x, y, z)
