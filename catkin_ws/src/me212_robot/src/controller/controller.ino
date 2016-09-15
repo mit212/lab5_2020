@@ -33,7 +33,7 @@ void loop() {
         encoder.update(); 
 
         // 2. Update position
-        robotPose.update(encoder.dThetaL, encoder.dThetaR); 
+        robotPose.update(encoder.dPhiL, encoder.dPhiR); 
 
         // 3. Send odometry through serial communication
         serialComm.send(robotPose); 

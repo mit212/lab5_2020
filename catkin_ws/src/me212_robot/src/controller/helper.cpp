@@ -42,8 +42,8 @@ void EncoderMeasurement::update() {
     float dphi2 = (dEncoder2 * enc2rad);
     
     //for encoder index and motor position switching (Right is 1, Left is 2)
-    dThetaR = dphi1;
-    dThetaL = dphi2;
+    dPhiR = dphi1;
+    dPhiL = dphi2;
     
     float dWheel1 = (dEncoder1 * enc2wheel);
     float dWheel2 = (dEncoder2 * enc2wheel);
@@ -58,7 +58,7 @@ void EncoderMeasurement::update() {
 }
 
 //RobotPose Class function implementation
-void RobotPose::update(float dThetaL, float dThetaR) {
+void RobotPose::update(float dPhiL, float dPhiR) {
     // orientation angle theta increment in radians
     float dTh;
     

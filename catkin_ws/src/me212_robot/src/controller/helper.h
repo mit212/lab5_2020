@@ -26,7 +26,7 @@ class EncoderMeasurement {
   public: 
     signed long encoder1CountPrev, encoder2CountPrev;  // encoder 1 and 2 counts in ticks for the previous cycle
     float v_L, v_R;                                    // left and right wheel velocity in m/s
-    float dThetaL, dThetaR;
+    float dPhiL, dPhiR;
     
     EncoderMeasurement(int motor_type);                // motor_type: 26 or 53
     
@@ -66,7 +66,7 @@ class RobotPose {
       Th(0), prevTh(0),
       X(0), Y(0), prevX(0),  prevY(0), pathDistance(0) {}
       
-    void update(float dThetaL, float dThetaR); // update the odometry from delta in R and L wheel positions
+    void update(float dPhiL, float dPhiR); // update the odometry from delta in R and L wheel positions
     
   private:
     float prevTh;          // previous orientation angle th value in radians
