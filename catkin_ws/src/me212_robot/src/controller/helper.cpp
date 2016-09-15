@@ -126,8 +126,8 @@ void PIController::doPIControl(String side, float desV, float currV) {
         float PCommand = Kpv1 * error;
 
         // I
-        mIntegratedVError1 += error * PERIOD;
-        float ICommand = constrain(Kiv1 * mIntegratedVError1, -200, 200);
+        mIntegratedVError1 = constrain(mIntegratedVError1 + error * PERIOD, -0.02, 0.02);
+        float ICommand = Kiv1 * mIntegratedVError1;
         
         // Sum
         float command =  PCommand + ICommand;
@@ -140,8 +140,8 @@ void PIController::doPIControl(String side, float desV, float currV) {
         float PCommand = Kpv2 * error;
 
         // I
-        mIntegratedVError2 += error * PERIOD;
-        float ICommand = constrain(Kiv2 * mIntegratedVError2, -200, 200);
+        mIntegratedVError2 = constrain(mIntegratedVError2 + error * PERIOD, -0.02, 0.02);
+        float ICommand = Kiv2 * mIntegratedVError2;
 
         // Sum
         float command =  PCommand + ICommand;
