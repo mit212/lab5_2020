@@ -78,10 +78,6 @@ void RobotPose::update(float dPhiL, float dPhiR) {
     // X = ;
     // Y = ;
 
-    // prevTh = ;
-    // prevX = ;
-    // prevY = ;
-
     // pathDistance += ;
 }
 
