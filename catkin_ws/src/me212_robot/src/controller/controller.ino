@@ -3,11 +3,12 @@
 // Fangzhou Xia       - xiafz    _ mit _ edu,    Sept 2015
 // Peter KT Yu        - peterkty _ mit _ edu,    Sept 2016
 // Ryan Fish          - fishr    _ mit _ edu,    Sept 2016
+// Jerry Ng           - jerryng  _ mit _ edu,    Feb  2019
 
 #include "Arduino.h"
 #include "helper.h"
 
-EncoderMeasurement  encoder(26);      // encoder handler class, set the motor type 53 or 26 here
+EncoderMeasurement  encoder(26);      // FIX THIS: encoder handler class, set the motor type 53 or 26 here
 RobotPose           robotPose;        // robot position and orientation calculation class
 PIController        wheelVelCtrl;     // velocity PI controller class
 SerialComm          serialComm;       // serial communication class
@@ -29,16 +30,16 @@ void loop() {
     
     if (currentTime - prevTime >= PERIOD_MICROS) {
       
-        // 1. Check encoder
+        // 1. Obtain and convert encoder measurement
         encoder.update(); 
 
-        // 2. Update position
+        // 2. Compute robot odometry
         robotPose.update(encoder.dPhiL, encoder.dPhiR); 
 
-        // 3. Send odometry through serial communication
+        // 3. Send robot odometry through serial port
         serialComm.send(robotPose); 
         
-        // 4. Compute R/L wheel velocities from robot delta pose command
+        // 4. Compute desired wheel velocity without or with motion planner
         if (!usePathPlanner) {
             // 4.1 a fixed wheel speed for testing odometry
             pathPlanner.desiredWV_R = 0.2;   
@@ -49,7 +50,7 @@ void loop() {
             pathPlanner.navigateTrajU(robotPose); 
         }
 
-        // 5. Send the velocity command to wheel velocity controller
+        // 5. Command desired velocity with PI controller
         wheelVelCtrl.doPIControl("Left",  pathPlanner.desiredWV_L, encoder.v_L); 
         wheelVelCtrl.doPIControl("Right", pathPlanner.desiredWV_R, encoder.v_R);
 
